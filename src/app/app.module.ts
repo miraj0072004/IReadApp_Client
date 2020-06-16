@@ -11,12 +11,15 @@ import { HomeComponent } from './home/home.component';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from './routes';
 import { HttpClientModule } from '@angular/common/http';
+import { BookComponent } from './book/book.component';
+import { BooksService } from './_services/books.service';
 
 @NgModule({
    declarations: [
       AppComponent,
       NavComponent,
-      HomeComponent
+      HomeComponent,
+      BookComponent
    ],
    imports: [
       BrowserModule,
@@ -24,11 +27,12 @@ import { HttpClientModule } from '@angular/common/http';
       ReactiveFormsModule,
       BrowserAnimationsModule,
       HttpClientModule,
-      RouterModule.forRoot(appRoutes),
+      RouterModule.forRoot(appRoutes)
    ],
    providers: [
       AuthService,
-      AlertifyService
+      AlertifyService,
+      BooksService
    ],
    bootstrap: [
       AppComponent
