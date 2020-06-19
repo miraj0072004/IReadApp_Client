@@ -94,3 +94,8 @@ export interface BooksRoot {
         items: Item[];
     }
 
+export interface MyBook {
+    id: string;
+    read: boolean;
+}    
+

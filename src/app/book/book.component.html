@@ -5,7 +5,7 @@
       {{ (item.volumeInfo.description.length > 100) ? (item.volumeInfo.description | slice:0:100)+'..':
        (item.volumeInfo.description) }}</p> -->
 
-       <p class="list-group-item-text">
+       <p *ngIf = "item.volumeInfo.description != null" class="list-group-item-text">
         {{(item.volumeInfo.description.length > 200)?
           (item.volumeInfo.description | slice:0:200)+'..':
           (item.volumeInfo.description)}}</p>
@@ -14,7 +14,12 @@
     <img
       [src]="item.volumeInfo.imageLinks.smallThumbnail"
       alt="{{ item.volumeInfo.subtitle }}"
-      class="img-responsive"
-      style="max-height: 100px;">
+      class="img-responsive mr-1"
+      style="max-height: 100px; max-width: 75px;">   
+      <div>
+        <p (click)="onWish()"><i class="fa fa-list-alt fa-2x myIcon" aria-hidden="true"></i></p>
+        <p (click)="onRead()"><i class="fa fa-check-circle fa-2x myIcon" aria-hidden="true"></i></p>
+      </div>   
   </span>
+  
 </div>

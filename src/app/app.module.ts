@@ -13,13 +13,19 @@ import { appRoutes } from './routes';
 import { HttpClientModule } from '@angular/common/http';
 import { BookComponent } from './book/book.component';
 import { BooksService } from './_services/books.service';
+import { HaveReadComponent } from './have-read/have-read.component';
+import { ToReadComponent } from './to-read/to-read.component';
+import { MyBookComponent } from './my-book/my-book.component';
 
 @NgModule({
    declarations: [
       AppComponent,
       NavComponent,
       HomeComponent,
-      BookComponent
+      BookComponent,
+      HaveReadComponent,
+      ToReadComponent,
+      MyBookComponent
    ],
    imports: [
       BrowserModule,

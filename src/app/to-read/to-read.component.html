@@ -1,18 +1,15 @@
-
 <div class="container mt-3">
-  <form class="form-inline" (ngSubmit)="searchBooks()">
+  <form class="form-inline" >
     <div class="form-group" >    
       <input type="text" class="form-control mr-1" id="searchTerm" [(ngModel)]="searchTerm" name="searchTerm" >
       <button type="submit" class="btn btn-primary">Search</button>
     </div>
   </form>
+  <h3>Books I wish to read</h3>
+  <div *ngIf = "booksHaveRead != null">
+    <app-my-book [book]="book" *ngFor="let book of booksHaveRead">
 
-  <div *ngIf = "booksRoot != null">
-    <app-book [item]="item" *ngFor="let item of booksRoot.items">
-
-    </app-book> 
+    </app-my-book> 
   </div>
   
 </div>
-
-

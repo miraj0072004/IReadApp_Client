@@ -5,10 +5,10 @@
     <a class="navbar-brand" [routerLink]="['/home']" >IRead App</a>
     <ul *ngIf="loggedIn()" class="navbar-nav mr-auto">
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" [routerLink]="['/mybooks']" >HaveRead</a>
+        <a class="nav-link" [routerLink]="['haveread']" >HaveRead</a>
       </li>
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" [routerLink]="['/wishlist']" >WillRead</a>
+        <a class="nav-link" [routerLink]="['toread']" >WillRead</a>
       </li>
 
       

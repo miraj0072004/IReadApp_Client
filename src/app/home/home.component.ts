@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
 
   searchBooks()
   {
+    this.booksRoot = null;
     const sendTerm = this.searchTerm.replace(' ', '+');
     this.bookService.getBooks(sendTerm).subscribe((result: BooksRoot) =>
     {
