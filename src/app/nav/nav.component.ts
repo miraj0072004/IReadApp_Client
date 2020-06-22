@@ -9,7 +9,7 @@ import { AlertifyService } from '../_services/alertify.service';
 })
 export class NavComponent implements OnInit {
 
-  model: any = {};
+  model: any = {username:'miraj', password:'password'};
   constructor(public authService: AuthService,
               private alertifyService: AlertifyService) { }
 

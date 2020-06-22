@@ -12,10 +12,13 @@ export class HaveReadComponent implements OnInit {
   searchTerm: string;  
   booksHaveRead: MyBook[];
 
-  constructor(private bookService: BooksService) { }
+  constructor(private booksService: BooksService) { }
   
   ngOnInit() {
-    this.booksHaveRead = this.bookService.getMyBooks(true);
+    this.booksHaveRead = this.booksService.getMyBooks(true);
+    this.booksService.myRepoBooksUpdated.subscribe((updatedBooks) =>
+    {      this.booksHaveRead = updatedBooks;
+    });
   }
 
 }

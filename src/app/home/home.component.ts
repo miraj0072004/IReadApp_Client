@@ -12,19 +12,27 @@ export class HomeComponent implements OnInit {
 
   constructor(private bookService: BooksService) { }
   searchTerm: string;
-  booksRoot: BooksRoot;  
+  booksRoot: BooksRoot;
   ngOnInit() {
+    if (this.bookService.booksRoot != null) {
+      this.searchTerm = this.bookService.searchTerm;
+      this.booksRoot = this.bookService.booksRoot;
+    }
+
   }
 
   searchBooks()
   {
     this.booksRoot = null;
     const sendTerm = this.searchTerm.replace(' ', '+');
-    this.bookService.getBooks(sendTerm).subscribe((result: BooksRoot) =>
-    {
-     this.booksRoot = result;
-    }
-    );
+    this.bookService.getBooks(sendTerm).subscribe(
+        (result: BooksRoot) =>
+        {
+         this.booksRoot = result;
+         this.bookService.booksRoot = this.booksRoot;
+        }
+      );
+
   }
 
 }

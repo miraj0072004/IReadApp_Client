@@ -6,8 +6,8 @@
     </div>
   </form>
   <h3>Books I wish to read</h3>
-  <div *ngIf = "booksHaveRead != null">
-    <app-my-book [book]="book" *ngFor="let book of booksHaveRead">
+  <div *ngIf = "booksToRead != null">
+    <app-my-book [book]="book" *ngFor="let book of booksToRead">
 
     </app-my-book> 
   </div>

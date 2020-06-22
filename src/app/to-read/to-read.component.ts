@@ -10,12 +10,15 @@ import { BooksService } from '../_services/books.service';
 export class ToReadComponent implements OnInit {
 
   searchTerm: string;  
-  booksHaveRead: MyBook[];
+  booksToRead: MyBook[];
 
-  constructor(private bookService: BooksService) { }
+  constructor(private booksService: BooksService) { }
   
   ngOnInit() {
-    this.booksHaveRead = this.bookService.getMyBooks(false);
+    this.booksToRead = this.booksService.getMyBooks(false);
+    this.booksService.myRepoBooksUpdated.subscribe((updatedBooks) =>
+    {      this.booksToRead = updatedBooks;
+    });
   }
 
 }

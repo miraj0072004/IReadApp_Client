@@ -97,5 +97,8 @@ export interface BooksRoot {
 export interface MyBook {
     id: string;
     read: boolean;
+    title: string;
+    description: string;
+    img: string;
 }    
 

@@ -1,10 +1,37 @@
-<div class="row">
+<!-- <div class="row">
   <div class="col-sm-9">
     <h4>{{book.id}}</h4>
   </div>
   <div class="col-sm-3">
     <h3>{{book.read}}</h3>
   </div>
+</div> -->
+
+<div class="row mb-2">
+  <div class="col-sm-9">
+    <h4 class="list-group-item-heading">{{ book.title}}</h4>
+    <!-- <p class="list-group-item-text">
+      {{ (item.volumeInfo.description.length > 100) ? (item.volumeInfo.description | slice:0:100)+'..':
+       (item.volumeInfo.description) }}</p> -->
+
+       <p *ngIf = "book.description != null" class="list-group-item-text">
+        {{(book.description.length > 200)?
+          (book.description | slice:0:200)+'..':
+          (book.description)}}</p>
+  </div>
+  <span class="col-sm-3" style="display: flex; justify-content: center;">
+    <img
+      [src]="book.img"     
+      class="img-responsive mr-1"
+      style="max-height: 100px; max-width: 75px;">   
+      <div>
+
+        <p (click)="onChange()" *ngIf="book.read == true"><i class="fa fa-list-alt fa-2x myIcon" aria-hidden="true"></i></p>
+        <p (click)="onChange()" *ngIf="book.read != true"><i class="fa fa-check-circle fa-2x myIcon" aria-hidden="true"></i></p>
+        <p (click)="onRemove()"><i class="fa fa-trash fa-2x myIcon" aria-hidden="true"></i></p>
+      </div>   
+  </span>
+  
 </div>
 
   

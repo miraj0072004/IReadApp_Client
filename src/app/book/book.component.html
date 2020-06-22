@@ -17,8 +17,8 @@
       class="img-responsive mr-1"
       style="max-height: 100px; max-width: 75px;">   
       <div>
-        <p (click)="onWish()"><i class="fa fa-list-alt fa-2x myIcon" aria-hidden="true"></i></p>
-        <p (click)="onRead()"><i class="fa fa-check-circle fa-2x myIcon" aria-hidden="true"></i></p>
+        <p (click)="onWish()"><i class="fa fa-list-alt fa-2x myIcon" [ngStyle]="{color:isToReadColor}" aria-hidden="true"></i></p>
+        <p (click)="onRead()"><i class="fa fa-check-circle fa-2x myIcon" [ngStyle]="{color:isReadColor}" aria-hidden="true"></i></p>
       </div>   
   </span>
   
