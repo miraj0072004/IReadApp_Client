@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -33,7 +34,8 @@ import { MyBookComponent } from './my-book/my-book.component';
       ReactiveFormsModule,
       BrowserAnimationsModule,
       HttpClientModule,
-      RouterModule.forRoot(appRoutes)
+      RouterModule.forRoot(appRoutes),
+      PaginationModule.forRoot()
    ],
    providers: [
       AuthService,

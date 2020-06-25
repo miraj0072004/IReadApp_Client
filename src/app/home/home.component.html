@@ -7,12 +7,22 @@
     </div>
   </form>
 
-  <div *ngIf = "booksRoot != null">
+  <!-- <div *ngIf="searched == true">
     <app-book [item]="item" *ngFor="let item of booksRoot.items">
 
-    </app-book> 
+    </app-book>   
+  </div> -->
+
+  <app-book [item]="item" *ngFor="let item of booksRoot.items"></app-book> 
+
+  <div class="d-flex justify-content-center" *ngIf="searched == true">
+    <pagination [totalItems]= "pagination.totalItems"
+                  [itemsPerPage]= "pagination.itemsPerPage"
+                  [(ngModel)]= "pagination.currentPage"
+                  (pageChanged)= "pageChanged($event)" >
+
+      </pagination>
   </div>
-  
 </div>
 
 

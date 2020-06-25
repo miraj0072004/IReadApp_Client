@@ -11,5 +11,12 @@
 
     </app-my-book> 
   </div>
+
+  <pagination [totalItems]= "pagination.totalItems"
+  [itemsPerPage]= "pagination.itemsPerPage"
+  [(ngModel)]= "pagination.currentPage"
+  (pageChanged)= "pageChanged($event)" >
+
+</pagination>
   
 </div>

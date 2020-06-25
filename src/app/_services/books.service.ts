@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BooksRoot, MyBook } from '../_models/book';
 import { Subject } from 'rxjs';
+import { Pagination } from '../_models/pagination';
 
 @Injectable({
   providedIn: 'root'
@@ -17,9 +18,17 @@ searchTerm: string;
 
 constructor(private http: HttpClient) { }
 
-getBooks(searchTerm: string) {
+getBooks(searchTerm: string, currentPage?, itemsPerPage? ) {
   this.searchTerm = searchTerm;
-   return this.http.get<BooksRoot>(this.bookUrl + '/?q=' + searchTerm + "&printType=books");
+  let urlToCall = this.bookUrl + '/?q=' + searchTerm + "&printType=books";
+
+  if (currentPage != null && itemsPerPage != null) {
+    const startIndex = itemsPerPage * (currentPage-1);
+    const maxResult = itemsPerPage;
+    urlToCall += "&startIndex=" + startIndex + "&maxResults=" + maxResult;
+  }
+
+  return this.http.get<BooksRoot>(urlToCall);
 }
 
 addToMyBooks(myBook: MyBook) {
@@ -30,15 +39,21 @@ addToMyBooks(myBook: MyBook) {
   book.read = !book.read;
 }
 
-getMyBooks(read: boolean) {
-  return this.myRepo.filter(b => b.read === read);
+getMyBooks(read: boolean, currentPage?, itemsPerPage?) {
+  const start = (currentPage-1)*itemsPerPage;
+  const end = start + itemsPerPage;
+  let myBooks = this.myRepo.filter(b => b.read === read).slice(start, end);
+
+  return {paginatedBooks:myBooks, totalCount: this.myRepo.length};
+
+  
 }
 
 removeMyBook(bookId: string)
 {  
   const bookToRemove = this.myRepo.find(b => b.id === bookId);
   this.myRepo.splice(this.myRepo.findIndex(b => b.id === bookToRemove.id),1);
-  this.myRepoBooksUpdated.next(this.getMyBooks(bookToRemove.read));
+  this.myRepoBooksUpdated.next(this.getMyBooks(bookToRemove.read).paginatedBooks);
 }
 
 changeMyBookGroup(myBook: MyBook) {
@@ -46,7 +61,7 @@ changeMyBookGroup(myBook: MyBook) {
   // this.myRepo[indexOfItemToChange].read = !this.myRepo[indexOfItemToChange].read;
   const readStatusToReturn = myBook.read;
   myBook.read = !myBook.read;
-  this.myRepoBooksUpdated.next(this.getMyBooks(readStatusToReturn));
+  this.myRepoBooksUpdated.next(this.getMyBooks(readStatusToReturn).paginatedBooks);
 }
 
 existsInMyList(bookId: string) {

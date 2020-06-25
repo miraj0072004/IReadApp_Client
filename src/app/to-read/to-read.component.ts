@@ -15,7 +15,7 @@ export class ToReadComponent implements OnInit {
   constructor(private booksService: BooksService) { }
   
   ngOnInit() {
-    this.booksToRead = this.booksService.getMyBooks(false);
+    this.booksToRead = this.booksService.getMyBooks(false).paginatedBooks;
     this.booksService.myRepoBooksUpdated.subscribe((updatedBooks) =>
     {      this.booksToRead = updatedBooks;
     });
