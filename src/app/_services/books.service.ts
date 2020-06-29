@@ -40,9 +40,15 @@ addToMyBooks(myBook: MyBook) {
 }
 
 getMyBooks(read: boolean, currentPage?, itemsPerPage?) {
-  const start = (currentPage-1)*itemsPerPage;
-  const end = start + itemsPerPage;
+  let start = (currentPage-1)*itemsPerPage;
+  let end = start + itemsPerPage;
   let myBooks = this.myRepo.filter(b => b.read === read).slice(start, end);
+
+ if (myBooks.length == 0) {
+  end = start;
+  start = start - itemsPerPage;
+  myBooks = this.myRepo.filter(b => b.read === read).slice(start, end);
+ }
 
   return {paginatedBooks:myBooks, totalCount: this.myRepo.length};
 

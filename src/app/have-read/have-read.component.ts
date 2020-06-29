@@ -33,6 +33,7 @@ export class HaveReadComponent implements OnInit {
     this.booksService.myRepoBooksUpdated.subscribe((updatedBooks) =>
     {
       this.booksHaveRead = updatedBooks;
+      this.searchMyBooks();
     });
   }
 
