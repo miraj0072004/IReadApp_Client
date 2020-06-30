@@ -6,17 +6,16 @@
     </div>
   </form>
   <h3>Books I have read</h3>
-  <div *ngIf = "booksHaveRead != null">
+  <div class="books" *ngIf = "booksHaveRead.length>0">
     <app-my-book [book]="book" *ngFor="let book of booksHaveRead">
 
     </app-my-book> 
   </div>
 
-  <pagination [totalItems]= "pagination.totalItems"
+  <pagination *ngIf = "booksHaveRead.length>0" class="d-flex justify-content-center" [totalItems]= "pagination.totalItems"
   [itemsPerPage]= "pagination.itemsPerPage"
   [(ngModel)]= "pagination.currentPage"
   (pageChanged)= "pageChanged($event)" >
-
-</pagination>
+  </pagination>
   
 </div>

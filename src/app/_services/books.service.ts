@@ -42,17 +42,16 @@ addToMyBooks(myBook: MyBook) {
 getMyBooks(read: boolean, currentPage?, itemsPerPage?) {
   let start = (currentPage-1)*itemsPerPage;
   let end = start + itemsPerPage;
-  let myBooks = this.myRepo.filter(b => b.read === read).slice(start, end);
+  let myBooks = this.myRepo.filter(b => b.read === read);
+  let myBooksToReturn = myBooks.slice(start, end);
+  let totalReturnCount = myBooks.length;
 
- if (myBooks.length == 0) {
+ if (totalReturnCount == 0 && myBooks.length != 0) {
   end = start;
   start = start - itemsPerPage;
   myBooks = this.myRepo.filter(b => b.read === read).slice(start, end);
  }
-
-  return {paginatedBooks:myBooks, totalCount: this.myRepo.length};
-
-  
+  return {paginatedBooks: myBooksToReturn, totalCount: totalReturnCount};
 }
 
 removeMyBook(bookId: string)
