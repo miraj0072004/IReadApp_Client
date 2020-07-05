@@ -1,0 +1,28 @@
+
+<div class="container mt-3">
+  <form class="form-inline" (ngSubmit)="searchBooks()">
+    <div class="form-group" >    
+      <input type="text" class="form-control mr-1" id="searchTerm" [(ngModel)]="searchTerm" name="searchTerm" >
+      <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+  </form>
+
+  <!-- <div *ngIf="searched == true">
+    <app-book [item]="item" *ngFor="let item of booksRoot.items">
+
+    </app-book>   
+  </div> -->
+
+  <app-book class="books" [item]="item" *ngFor="let item of booksRoot.items"></app-book> 
+
+  <div class="d-flex justify-content-center" *ngIf="searched == true">
+    <pagination [totalItems]= "pagination.totalItems"
+                  [itemsPerPage]= "pagination.itemsPerPage"
+                  [(ngModel)]= "pagination.currentPage"
+                  (pageChanged)= "pageChanged($event)" >
+
+      </pagination>
+  </div>
+</div>
+
+

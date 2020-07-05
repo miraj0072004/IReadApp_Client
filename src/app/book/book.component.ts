@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { VolumeInfo, Item } from '../_models/book';
 import { BooksService } from '../_services/books.service';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { BookModalComponent } from '../book-modal/book-modal.component';
 
 @Component({
   selector: 'app-book',
@@ -9,11 +11,12 @@ import { BooksService } from '../_services/books.service';
 })
 export class BookComponent implements OnInit {
 
+  bsModalRef: BsModalRef;
   @Input() item: Item;
   isRead: boolean;
   isReadColor: string;
   isToReadColor: string;
-  constructor(private booksService: BooksService) { }
+  constructor(private booksService: BooksService, private modalService: BsModalService) { }
 
   ngOnInit() {
     this.isRead = this.booksService.existsInMyList(this.item.id);
@@ -53,14 +56,26 @@ export class BookComponent implements OnInit {
     
   }
 
-  // getReadColor()
-  // {
-  //   return this.isRead === true?'green':'black';
-  // }
+  onBookInfoModal()
+  {
+    const initialState = {
+      item: this.item,
+      isToReadColor: this.isToReadColor,
+      isReadColor: this.isReadColor
 
-  // getNotReadColor()
-  // {
-  //   return this.isRead === false?'green':'black';
-  // }
+    };
+    this.bsModalRef = this.modalService.show(BookModalComponent, {initialState});
+    this.bsModalRef.content.onReadEmitter.subscribe((nothing)=>
+    {
+      this.onRead();
+    });
+    this.bsModalRef.content.onWishEmitter.subscribe((nothing)=>
+    {
+      this.onWish();
+    });
+
+    this.bsModalRef.content.closeBtnName = 'Close';
+  }
+
 
 }

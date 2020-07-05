@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -17,6 +18,9 @@ import { BooksService } from './_services/books.service';
 import { HaveReadComponent } from './have-read/have-read.component';
 import { ToReadComponent } from './to-read/to-read.component';
 import { MyBookComponent } from './my-book/my-book.component';
+import { BookModalComponent } from './book-modal/book-modal.component';
+import { BrowseComponent } from './browse/browse.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
    declarations: [
@@ -26,7 +30,11 @@ import { MyBookComponent } from './my-book/my-book.component';
       BookComponent,
       HaveReadComponent,
       ToReadComponent,
-      MyBookComponent
+      MyBookComponent,
+      BookModalComponent,
+      BookModalComponent,
+      BrowseComponent,
+      RegisterComponent
    ],
    imports: [
       BrowserModule,
@@ -35,12 +43,16 @@ import { MyBookComponent } from './my-book/my-book.component';
       BrowserAnimationsModule,
       HttpClientModule,
       RouterModule.forRoot(appRoutes),
-      PaginationModule.forRoot()
+      PaginationModule.forRoot(),
+      ModalModule.forRoot()
    ],
    providers: [
       AuthService,
       AlertifyService,
       BooksService
+   ],
+   entryComponents: [
+      BookModalComponent
    ],
    bootstrap: [
       AppComponent

@@ -36,7 +36,11 @@ addToMyBooks(myBook: MyBook) {
   if (book == null) {
    this.myRepo.push(myBook);
   }
-  book.read = !book.read;
+  else
+  {
+    book.read = !book.read;
+  }
+  
 }
 
 getMyBooks(read: boolean, currentPage?, itemsPerPage?) {
