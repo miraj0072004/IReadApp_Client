@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { BarRatingModule } from 'ngx-bar-rating';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -42,6 +43,7 @@ import { RegisterComponent } from './register/register.component';
       ReactiveFormsModule,
       BrowserAnimationsModule,
       HttpClientModule,
+      BarRatingModule,
       RouterModule.forRoot(appRoutes),
       PaginationModule.forRoot(),
       ModalModule.forRoot()

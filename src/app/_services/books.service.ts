@@ -79,8 +79,16 @@ existsInMyList(bookId: string) {
   if (bookToFind == null) {
     return null;
   } else {
-    return bookToFind.read;
+    //return bookToFind.read;
+    return bookToFind;
   }
+}
+
+updateRating(bookId: string, newRating : number)
+{ 
+
+  this.myRepo.find(b => b.id === bookId).rating = newRating;  
+
 }
 
 }

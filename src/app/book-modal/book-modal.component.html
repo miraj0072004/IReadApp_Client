@@ -17,6 +17,7 @@
 </div>
 <div class="modal-footer">
   <div class="row">
+    <bar-rating (rateChange)="onRateChanged(rate)" [(rate)]="rate" [max]="5" [theme]="'fontawesome'"></bar-rating>
     <button type="button"
       class="btn btn-default mr-2"
       (click)="onWish()">

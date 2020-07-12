@@ -15,9 +15,12 @@ export class BookModalComponent implements OnInit {
   isReadColor: string;
   isToReadColor: string;
   item: Item;
+  rate:number;
+  
 
   @Output() onWishEmitter = new EventEmitter();
   @Output() onReadEmitter = new EventEmitter();
+  @Output() onRateChangedEmitter = new EventEmitter();
 
   constructor(public bsModalRef: BsModalRef,private booksService: BooksService) { }
 
@@ -28,15 +31,20 @@ export class BookModalComponent implements OnInit {
   {
     this.isToReadColor = "green";
     this.isReadColor = "black"; 
-    this.onWishEmitter.emit("");
+    this.onWishEmitter.emit(this.rate);
   }
 
   onRead()
   {
     this.isReadColor = "green";
     this.isToReadColor = "black";
-    this.onReadEmitter.emit("");
+    this.onReadEmitter.emit(this.rate);
     
+  }
+
+  onRateChanged(newRate)
+  {
+    this.onRateChangedEmitter.emit(newRate);
   }
 
 }
