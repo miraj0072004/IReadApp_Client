@@ -16,6 +16,7 @@ export class BookModalComponent implements OnInit {
   isToReadColor: string;
   item: Item;
   rate:number;
+  isRead: boolean;
   
 
   @Output() onWishEmitter = new EventEmitter();
@@ -25,26 +26,60 @@ export class BookModalComponent implements OnInit {
   constructor(public bsModalRef: BsModalRef,private booksService: BooksService) { }
 
   ngOnInit() {
+    if (this.isReadColor === 'green') {
+      this.isRead = true;
+    }
+    else
+    {
+      this.isRead = null;
+    }
   }
 
   onWish()
   {
-    this.isToReadColor = "green";
-    this.isReadColor = "black"; 
-    this.onWishEmitter.emit(this.rate);
+    if (this.isRead || this.isRead == null) {
+      this.isRead = false;
+      this.isToReadColor = "green";
+      this.isReadColor = "black";
+      this.isRead = false;
+      this.rate = 0;
+      this.onWishEmitter.emit(this.rate);
+    }
+    
   }
 
-  onRead()
+  onRead(newRate=0)
   {
-    this.isReadColor = "green";
-    this.isToReadColor = "black";
-    this.onReadEmitter.emit(this.rate);
+    if(!this.isRead)
+    {
+      this.isRead = true;
+      this.isReadColor = "green";
+      this.isToReadColor = "black";
+      
+      if(newRate == 0)
+      {
+        this.rate = 1;        
+      }  
+      
+
+      //let ratingToSend = this.rate != 0?this.rate:1;
+      this.rate = 1;
+      this.onReadEmitter.emit(newRate);
+    }   
     
   }
 
   onRateChanged(newRate)
   {
-    this.onRateChangedEmitter.emit(newRate);
+
+    if (this.isRead) {
+      this.onRateChangedEmitter.emit(newRate);
+    } else
+    {
+      this.onRead(newRate);
+    }
+
+    
   }
 
 }

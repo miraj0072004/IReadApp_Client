@@ -39,7 +39,7 @@ export class BookComponent implements OnInit {
 
   }
 
-  onRead(rating: number)
+  onRead(rating: number = 1)
   {
     this.isReadColor = "green";
     this.isToReadColor = "black";
@@ -52,7 +52,7 @@ export class BookComponent implements OnInit {
     
   }
 
-  onWish(rating: number)
+  onWish()
   {
     this.isToReadColor = "green";
     this.isReadColor = "black"; 
@@ -60,7 +60,7 @@ export class BookComponent implements OnInit {
                                     read: false,
                                     title: this.item.volumeInfo.title,
                                     description: this.item.volumeInfo.description,
-                                    rating,
+                                    rating: 0,
                                     img: this.item.volumeInfo.imageLinks.smallThumbnail});
 
     
@@ -68,6 +68,7 @@ export class BookComponent implements OnInit {
 
   onBookInfoModal()
   {
+    this.myBook = this.booksService.existsInMyList(this.item.id);
     const initialState = {
       item: this.item,
       isToReadColor: this.isToReadColor,
@@ -86,9 +87,9 @@ export class BookComponent implements OnInit {
     });
     this.bsModalRef.content.onWishEmitter.subscribe((rating)=>
     {
-      // let ratingToAssign = rating == null ? 0 : rating;
-      //this.rating = rating;
-      this.onWish(rating);
+      
+      //this.onWish(rating);
+      this.onWish();
     });
     this.bsModalRef.content.onRateChangedEmitter.subscribe((rating)=>
     {
@@ -96,6 +97,10 @@ export class BookComponent implements OnInit {
 
       if (existingBook != null) {
         this.booksService.updateRating(this.item.id, rating);
+      }
+      else
+      {
+
       }
       
     });

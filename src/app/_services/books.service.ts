@@ -38,6 +38,7 @@ addToMyBooks(myBook: MyBook) {
   }
   else
   {
+    book.rating = myBook.rating;
     book.read = !book.read;
   }
   
@@ -70,6 +71,8 @@ changeMyBookGroup(myBook: MyBook) {
   // this.myRepo[indexOfItemToChange].read = !this.myRepo[indexOfItemToChange].read;
   const readStatusToReturn = myBook.read;
   myBook.read = !myBook.read;
+
+  myBook.rating = myBook.read == false?0:1; 
   this.myRepoBooksUpdated.next(this.getMyBooks(readStatusToReturn).paginatedBooks);
 }
 

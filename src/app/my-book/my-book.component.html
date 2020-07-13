@@ -25,7 +25,7 @@
       class="img-responsive mr-1"
       style="cursor: pointer; max-height: 100px; max-width: 75px;">   
       <div>
-        <bar-rating [(rate)]="book.rating" [max]="5" [theme]="'fontawesome'"></bar-rating>
+        <bar-rating *ngIf="book.read == true" [(rate)]="book.rating" [max]="5" [theme]="'fontawesome'"></bar-rating>
         <div class="row" style="display: flex; justify-content: center;">
           <p (click)="onChange()" *ngIf="book.read == true"><i class="fa fa-list-alt fa-2x myIcon col-sm-6"
               aria-hidden="true"></i></p>
