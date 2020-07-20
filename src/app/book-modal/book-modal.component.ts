@@ -59,12 +59,16 @@ export class BookModalComponent implements OnInit {
       if(newRate == 0)
       {
         this.rate = 1;        
+      }
+      else
+      {
+        this.rate = newRate;
       }  
       
 
       //let ratingToSend = this.rate != 0?this.rate:1;
-      this.rate = 1;
-      this.onReadEmitter.emit(newRate);
+      
+      this.onReadEmitter.emit(this.rate);
     }   
     
   }

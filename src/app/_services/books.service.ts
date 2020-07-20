@@ -51,29 +51,29 @@ getMyBooks(read: boolean, currentPage?, itemsPerPage?) {
   let myBooksToReturn = myBooks.slice(start, end);
   let totalReturnCount = myBooks.length;
 
- if (totalReturnCount == 0 && myBooks.length != 0) {
+ if (totalReturnCount != 0 && myBooksToReturn.length == 0) {
   end = start;
   start = start - itemsPerPage;
-  myBooks = this.myRepo.filter(b => b.read === read).slice(start, end);
+  myBooksToReturn = this.myRepo.filter(b => b.read === read).slice(start, end);
  }
   return {paginatedBooks: myBooksToReturn, totalCount: totalReturnCount};
 }
 
-removeMyBook(bookId: string)
+removeMyBook(bookId: string, currentPage: number, itemsPerPage: number)
 {  
   const bookToRemove = this.myRepo.find(b => b.id === bookId);
   this.myRepo.splice(this.myRepo.findIndex(b => b.id === bookToRemove.id),1);
-  this.myRepoBooksUpdated.next(this.getMyBooks(bookToRemove.read).paginatedBooks);
+  this.myRepoBooksUpdated.next(this.getMyBooks(bookToRemove.read, currentPage, itemsPerPage).paginatedBooks);
 }
 
-changeMyBookGroup(myBook: MyBook) {
+changeMyBookGroup(myBook: MyBook, currentPage: number, itemsPerPage: number) {
   // let indexOfItemToChange = this.myRepo.findIndex(b => b == myBook);
   // this.myRepo[indexOfItemToChange].read = !this.myRepo[indexOfItemToChange].read;
   const readStatusToReturn = myBook.read;
   myBook.read = !myBook.read;
 
   myBook.rating = myBook.read == false?0:1; 
-  this.myRepoBooksUpdated.next(this.getMyBooks(readStatusToReturn).paginatedBooks);
+  this.myRepoBooksUpdated.next(this.getMyBooks(readStatusToReturn, currentPage, itemsPerPage).paginatedBooks);
 }
 
 existsInMyList(bookId: string) {

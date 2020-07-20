@@ -1,21 +1,24 @@
 <div class="container mt-3">
-  <form class="form-inline" >
+  <form class="form-inline mb-3" >
     <div class="form-group" >    
       <input type="text" class="form-control mr-1" id="searchTerm" [(ngModel)]="searchTerm" name="searchTerm" >
       <button type="submit" class="btn btn-primary">Search</button>
     </div>
   </form>
-  <h3>Books I wish to read</h3>
-  <div class="books" *ngIf = "booksToRead.length>0">
-    <app-my-book [book]="book" *ngFor="let book of booksToRead">
+  <!-- <h3>Books I wish to read</h3> -->
+  <div class="books mb-5" *ngIf = "booksToRead.length>0">
+    <app-my-book [itemsPerPage]="pagination.itemsPerPage" [currentPage]="pagination.currentPage" [book]="book" *ngFor="let book of booksToRead">
 
     </app-my-book> 
   </div>
 
-  <pagination *ngIf = "booksToRead.length>0" class="d-flex justify-content-center" [totalItems]= "pagination.totalItems"
-  [itemsPerPage]= "pagination.itemsPerPage"
-  [(ngModel)]= "pagination.currentPage"
-  (pageChanged)= "pageChanged($event)" >
-  </pagination>
+  <div>
+    <pagination *ngIf = "booksToRead.length>0" class="d-flex justify-content-center" [totalItems]= "pagination.totalItems"
+      [itemsPerPage]= "pagination.itemsPerPage"
+      [(ngModel)]= "pagination.currentPage"
+      (pageChanged)= "pageChanged($event)" >
+      </pagination>
+  </div>
+
   
 </div>

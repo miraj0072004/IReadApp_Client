@@ -11,18 +11,20 @@ export class MyBookComponent implements OnInit {
 
   constructor(private booksService: BooksService) { }
   @Input() book: MyBook;
+  @Input() currentPage: number;
+  @Input() itemsPerPage: number;
   ngOnInit() {
     
   }
 
   onRemove()
   {
-    this.booksService.removeMyBook(this.book.id);
+    this.booksService.removeMyBook(this.book.id, this.currentPage, this.itemsPerPage);
   }
 
   onChange()
   {
-    this.booksService.changeMyBookGroup(this.book);
+    this.booksService.changeMyBookGroup(this.book, this.currentPage, this.itemsPerPage);
   }
 
 }

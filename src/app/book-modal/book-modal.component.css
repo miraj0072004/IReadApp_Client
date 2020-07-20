@@ -1,0 +1,13 @@
+.center-vertical
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.center-horizontal
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
