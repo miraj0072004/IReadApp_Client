@@ -17,7 +17,7 @@ export class BookModalComponent implements OnInit {
   item: Item;
   rate:number;
   isRead: boolean;
-  
+  description: string;
 
   @Output() onWishEmitter = new EventEmitter();
   @Output() onReadEmitter = new EventEmitter();
@@ -32,6 +32,14 @@ export class BookModalComponent implements OnInit {
     else
     {
       this.isRead = null;
+    }
+
+
+    if (this.item.volumeInfo.description) {
+      this.description = this.item.volumeInfo.description;
+    } else
+    {
+      this.description = 'This book doesn\'t contain a description';
     }
   }
 
