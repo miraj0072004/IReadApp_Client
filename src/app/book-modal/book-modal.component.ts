@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
-import { Item } from '../_models/book';
+import { Item, VolumeInfo } from '../_models/book';
 import { BooksService } from '../_services/books.service';
 
 
@@ -14,10 +14,13 @@ export class BookModalComponent implements OnInit {
 
   isReadColor: string;
   isToReadColor: string;
-  item: Item;
-  rate:number;
+  book: VolumeInfo;
+  rate: number;
   isRead: boolean;
   description: string;
+  alreadyAdded: boolean;
+  imageUrl: string;
+  subtitle: string;
 
   @Output() onWishEmitter = new EventEmitter();
   @Output() onReadEmitter = new EventEmitter();
@@ -35,11 +38,17 @@ export class BookModalComponent implements OnInit {
     }
 
 
-    if (this.item.volumeInfo.description) {
-      this.description = this.item.volumeInfo.description;
+    if (this.book.description) {
+      this.description = this.book.description;
     } else
     {
       this.description = 'This book doesn\'t contain a description';
+    }
+
+    if(!this.alreadyAdded)
+    {
+      this.imageUrl = this.book.imageLinks.thumbnail;
+      this.subtitle = this.book.subtitle;
     }
   }
 

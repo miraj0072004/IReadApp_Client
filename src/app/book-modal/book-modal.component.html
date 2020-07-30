@@ -1,5 +1,5 @@
 <div class="modal-header">
-  <h4 class="modal-title pull-left">{{item.volumeInfo.title}}</h4>
+  <h4 class="modal-title pull-left">{{book.title}}</h4>
    
   <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
     <span aria-hidden="true">&times;</span>
@@ -7,8 +7,8 @@
 </div>
 <div class="modal-body" >
   <div class="center-horizontal"><img
-    [src]="item.volumeInfo.imageLinks.thumbnail"
-    alt="{{ item.volumeInfo.subtitle }}"
+    [src]="imageUrl"
+    alt="{{ subtitle }}"
     class="img-responsive mr-3"
     style="max-height: 300px; max-width: 150px;"
     ></div>
@@ -24,13 +24,13 @@
 </div>
 <div class="modal-footer">
   <div class="row">
-    <bar-rating (rateChange)="onRateChanged($event)" [(rate)]="rate" [max]="5" [theme]="'fontawesome'"></bar-rating>
-    <button type="button"
+    <bar-rating *ngIf="!alreadyAdded || isRead" (rateChange)="onRateChanged($event)" [(rate)]="rate" [max]="5" [theme]="'fontawesome'"></bar-rating>
+    <button *ngIf="!alreadyAdded" type="button"
       class="btn btn-default mr-2"
       (click)="onWish()">
         <i class="fa fa-list-alt fa-2x myIcon" [ngStyle]="{color:isToReadColor}" aria-hidden="true"></i>      
     </button>
-    <button type="button"
+    <button *ngIf="!alreadyAdded" type="button"
       class="btn btn-default"
       (click)="onRead()">
         <i class="fa fa-check-circle fa-2x myIcon" [ngStyle]="{color:isReadColor}" aria-hidden="true"></i>      

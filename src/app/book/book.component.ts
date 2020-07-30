@@ -70,7 +70,7 @@ export class BookComponent implements OnInit {
   {
     this.myBook = this.booksService.existsInMyList(this.item.id);
     const initialState = {
-      item: this.item,
+      book: this.item.volumeInfo,
       isToReadColor: this.isToReadColor,
       isReadColor: this.isReadColor,
       rate: this.myBook != null ? this.myBook.rating : 0
