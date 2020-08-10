@@ -23,7 +23,7 @@ export class HaveReadComponent implements OnInit {
   }
 
   searchMyBooks() {
-    var result = this.booksService.getMyBooks(true, this.pagination.currentPage, this.pagination.itemsPerPage);
+    var result = this.booksService.getMyBooks(true, this.pagination.currentPage, this.pagination.itemsPerPage, this.searchTerm);
     this.booksHaveRead = result.paginatedBooks;
     this.pagination.totalItems = result.totalCount;
   }

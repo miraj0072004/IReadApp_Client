@@ -33,7 +33,11 @@ export class ToReadComponent implements OnInit {
   }
 
   searchMyBooks() {
-    var result = this.booksService.getMyBooks(false, this.pagination.currentPage, this.pagination.itemsPerPage);
+    var result = this.booksService.getMyBooks(
+        false,
+        this.pagination.currentPage,
+        this.pagination.itemsPerPage,
+        this.searchTerm);
     this.booksToRead = result.paginatedBooks;
     this.pagination.totalItems = result.totalCount;
   }

@@ -44,10 +44,14 @@ addToMyBooks(myBook: MyBook) {
   
 }
 
-getMyBooks(read: boolean, currentPage?, itemsPerPage?) {
+getMyBooks(read: boolean, currentPage?: number, itemsPerPage?: number, searchTerm?: string) {
   let start = (currentPage-1)*itemsPerPage;
   let end = start + itemsPerPage;
   let myBooks = this.myRepo.filter(b => b.read === read);
+  if(searchTerm != null)
+  {
+    myBooks = myBooks.filter( b => b.title.toLowerCase().includes(searchTerm.toLowerCase()));
+  }
   let myBooksToReturn = myBooks.slice(start, end);
   let totalReturnCount = myBooks.length;
 
