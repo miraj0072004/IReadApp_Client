@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BarRatingModule } from 'ngx-bar-rating';
+import {ButtonsModule} from 'ngx-bootstrap/buttons';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -46,7 +47,8 @@ import { RegisterComponent } from './register/register.component';
       BarRatingModule,
       RouterModule.forRoot(appRoutes),
       PaginationModule.forRoot(),
-      ModalModule.forRoot()
+      ModalModule.forRoot(),
+      ButtonsModule.forRoot()
    ],
    providers: [
       AuthService,

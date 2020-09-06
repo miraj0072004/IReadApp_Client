@@ -44,13 +44,38 @@ addToMyBooks(myBook: MyBook) {
   
 }
 
-getMyBooks(read: boolean, currentPage?: number, itemsPerPage?: number, searchTerm?: string) {
+getMyBooks(read: boolean, currentPage?: number, itemsPerPage?: number,  bookParams?) {
   let start = (currentPage-1)*itemsPerPage;
   let end = start + itemsPerPage;
   let myBooks = this.myRepo.filter(b => b.read === read);
-  if(searchTerm != null)
+  if(bookParams.searchTerm != null)
   {
-    myBooks = myBooks.filter( b => b.title.toLowerCase().includes(searchTerm.toLowerCase()));
+    myBooks = myBooks.filter( b => b.title.toLowerCase().includes(bookParams.searchTerm.toLowerCase()));
+
+    if (bookParams.orderBy) {
+      if (bookParams.orderBy = 'title') {
+        myBooks = myBooks.sort((a,b) => {
+          if (a.title>b.title) {
+            return 1;
+          }
+          if (b.title>a.title) {
+            return -1;
+        }
+      });
+      }
+
+      if (bookParams.orderBy = 'rating') {
+        myBooks = myBooks.sort((a,b) => {
+          if (a.rating>b.rating) {
+            return 1;
+          }
+          if (b.rating>a.rating) {
+            return -1;
+        }
+      });
+      }
+      
+    }
   }
   let myBooksToReturn = myBooks.slice(start, end);
   let totalReturnCount = myBooks.length;

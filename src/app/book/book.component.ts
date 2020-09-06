@@ -18,6 +18,7 @@ export class BookComponent implements OnInit {
   //rating: number;
   isReadColor: string;
   isToReadColor: string;
+  imagePath: string;
   constructor(private booksService: BooksService, private modalService: BsModalService) { }
 
   ngOnInit() {
@@ -26,23 +27,30 @@ export class BookComponent implements OnInit {
 
     if (this.myBook != null) {
       if ( this.myBook.read === true) {
-        this.isReadColor = "green";
-        this.isToReadColor = "black";
-        
+        this.isReadColor = 'green';
+        this.isToReadColor = 'black';
       } else if (this.myBook.read === false) {
-        this.isToReadColor = "green";
-        this.isReadColor = "black";
+        this.isToReadColor = 'green';
+        this.isReadColor = 'black';
       }
-      //this.rating = this.myBook.rating;
     }
 
+    if (this.item.volumeInfo.imageLinks)
+    {
+      this.imagePath = this.item.volumeInfo.imageLinks.smallThumbnail;
+    } else
+    {
+      this.imagePath = 'assets/generic_book.png';
+    }
+
+    // this.imagePath = 'assets/generic_book.png';
 
   }
 
   onRead(rating: number = 1)
   {
-    this.isReadColor = "green";
-    this.isToReadColor = "black";
+    this.isReadColor = 'green';
+    this.isToReadColor = 'black';
     this.booksService.addToMyBooks({id: this.item.id,
                                     read: true,
                                     title: this.item.volumeInfo.title,
@@ -54,8 +62,8 @@ export class BookComponent implements OnInit {
 
   onWish()
   {
-    this.isToReadColor = "green";
-    this.isReadColor = "black"; 
+    this.isToReadColor = 'green';
+    this.isReadColor = 'black'; 
     this.booksService.addToMyBooks({id: this.item.id,
                                     read: false,
                                     title: this.item.volumeInfo.title,

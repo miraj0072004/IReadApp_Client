@@ -4,6 +4,15 @@
       <input type="text" class="form-control mr-1" id="searchTerm" [(ngModel)]="searchTerm" name="searchTerm" >
       <button type="submit" class="btn btn-primary">Search</button>
     </div>
+
+    <div class="col">
+      <div class="btn-group float-right">
+        <button type="button" name="orderBy" [(ngModel)]="bookParams.orderBy"
+         class="btn btn-primary" btnRadio="title" (click)="searchMyBooks()">Title</button>
+        <button type="button" name="orderBy" [(ngModel)]="bookParams.orderBy"
+         class="btn btn-primary" btnRadio="rating" (click)="searchMyBooks()">Rating</button>
+      </div>
+    </div>
   </form>
   <!-- <h3>Books I have read</h3> -->
   <div class="books mb-5" *ngIf = "booksHaveRead.length>0">

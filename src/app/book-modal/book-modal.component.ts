@@ -45,10 +45,21 @@ export class BookModalComponent implements OnInit {
       this.description = 'This book doesn\'t contain a description';
     }
 
-    if(!this.alreadyAdded)
+    // if(!this.alreadyAdded)
+    // {
+    //   this.imageUrl = this.book.imageLinks.thumbnail;
+    //   this.subtitle = this.book.subtitle;
+    // }
+
+    //this.imageUrl = this.book.imageLinks.thumbnail;
+    this.subtitle = this.book.subtitle;
+
+    if (this.book.imageLinks)
     {
       this.imageUrl = this.book.imageLinks.thumbnail;
-      this.subtitle = this.book.subtitle;
+    } else
+    {
+      this.imageUrl = 'assets/generic_book.png';
     }
   }
 

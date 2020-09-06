@@ -17,7 +17,7 @@ export class BrowseComponent implements OnInit {
   booksRoot: BooksRoot = {kind:'', totalItems:0, items:[]};
   pagination: Pagination = {itemsPerPage:5, totalItems: 30, currentPage:1, totalPages:0 };
   searched = false;
-
+  
   ngOnInit() {
     if (this.bookService.booksRoot != null) {
       this.searchTerm = this.bookService.searchTerm;
@@ -38,6 +38,7 @@ export class BrowseComponent implements OnInit {
     this.searched = true;
     this.booksRoot = null;
     const sendTerm = this.searchTerm.replace(' ', '+');
+    
     this.bookService.getBooks(sendTerm, this.pagination.currentPage, this.pagination.itemsPerPage).subscribe(
         (result: BooksRoot) =>
         {

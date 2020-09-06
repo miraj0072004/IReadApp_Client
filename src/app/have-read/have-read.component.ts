@@ -10,8 +10,9 @@ import { Pagination } from '../_models/pagination';
 })
 export class HaveReadComponent implements OnInit {
 
-  searchTerm: string;  
+  searchTerm: string;
   booksHaveRead: MyBook[];
+  bookParams: any = {};
   pagination: Pagination = {itemsPerPage:5, totalItems: 30, currentPage:1, totalPages:0 };
 
   constructor(private booksService: BooksService) { }
@@ -23,7 +24,8 @@ export class HaveReadComponent implements OnInit {
   }
 
   searchMyBooks() {
-    var result = this.booksService.getMyBooks(true, this.pagination.currentPage, this.pagination.itemsPerPage, this.searchTerm);
+    this.bookParams.searchTerm = this.searchTerm;
+    var result = this.booksService.getMyBooks(true, this.pagination.currentPage, this.pagination.itemsPerPage, this.bookParams);
     this.booksHaveRead = result.paginatedBooks;
     this.pagination.totalItems = result.totalCount;
   }
@@ -33,6 +35,7 @@ export class HaveReadComponent implements OnInit {
     this.booksService.myRepoBooksUpdated.subscribe((updatedBooks) =>
     {
       this.booksHaveRead = updatedBooks;
+      this.bookParams.orderBy = 'title';
       this.searchMyBooks();
     });
   }
